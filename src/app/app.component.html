@@ -1,0 +1,53 @@
+
+
+<div>
+    <div>
+        <ng-container class="container1">
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+                    <h5>{{points}} pointes</h5>
+                </div>
+                <div class="question-remain">
+                    <span>Question {{currentQuestion + 1}} of {{questionList.length}}</span>
+                </div>
+                <div class="timer">
+                    <span *ngIf="counter">{{counter}} sec
+                    </span>
+                </div>
+            </div>
+            <div class="question">
+                <div class="card">
+                    <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+                </div>
+
+            </div>
+            <div class="options">
+                <ol *ngFor="let option of questionList[currentQuestion]?.options">
+                    <li (click)="answer(currentQuestion+1, option)">
+                        <div appChangeBg [isCorrect]="option.correct" class="card">
+                            {{option.text}}
+                        </div>
+                    </li>
+
+                </ol>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button [disabled]="currentQuestion == 0" class="btn"><i class="fa text-primary fa-chevron-left fa-3x"
+                        aria-hidden="true" (click)=" previousQuestion()"></i></button>
+                <button (click)="resetQuiz()" class="btn"><i class="fa text-primary fa-refresh fa-3x" aria-hidden="true"></i>
+                </button>
+
+                <button (click)="startCounter()" class="btn"><i class="fa text-primary fa-play fa-3x" aria-hidden="true"></i>
+                </button>
+                <button [disabled]="currentQuestion >= questionList.length - 1" class="btn"><i
+                        class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true" (click)="nextQuestion()"></i></button>
+            </div>
+        </ng-container>
+        <ng-container>
+            <div class="row d-flex justify-content-between">
+
+            </div>
+        </ng-container>
+    </div>
+
+</div>
